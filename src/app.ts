@@ -1,11 +1,12 @@
 import express from "express";
-import config from "./config/index";
+import config from "./config";
 import { db } from "./config/dbConfig";
 import logger from "morgan";
 import cookieParser from "cookie-parser";
 import cors from "cors";
 import { HttpError } from 'http-errors';
-
+import { errorMessages, notFoundError } from "./middleware/errorMessage";
+import userRoutes from "./routes/userRoutes";
 
 
 const app = express();
@@ -20,9 +21,12 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cors());
 
 
+app.use('/users', userRoutes)
+
+app.all('*', notFoundError);
+app.use(errorMessages);
 
 
-const BUILD_PORT = PORT;
 
 db.sync({}).then(()=>{
     console.log(`Database is succeffully connected`);
@@ -30,6 +34,7 @@ db.sync({}).then(()=>{
     console.log(`Database error at ${error}`)
 })
 
+const BUILD_PORT = PORT;
 
 
 app.listen(BUILD_PORT || 3000 , () => {

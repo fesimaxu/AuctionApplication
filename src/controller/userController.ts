@@ -12,11 +12,15 @@ export const registerUser = async (req: Request, res: Response, next: NextFuncti
 
    try {
 
-    const { userName, firstName, lastName, dateOfBirth, email, password, phoneNumber } = req.body;
+    let { userName, firstName, lastName, dateOfBirth, email, password, repeat_password, phoneNumber } = req.body;
 
-    const birth_year = dateOfBirth.split(' ')[2]
+    console.log("phone number ", phoneNumber)
+    console.log('dateOfBirth', dateOfBirth)
+    const birth_year = dateOfBirth.split('-')[2]
 
-    const { error } = registerSchema.validate({ userName, firstName, lastName, birth_year, email, password });
+    console.log("birth_year", birth_year)
+
+    const { error } = registerSchema.validate({ userName, firstName, lastName, birth_year, email, password, repeat_password });
 
     if(error){
         return res.status(400).json({
@@ -28,7 +32,7 @@ export const registerUser = async (req: Request, res: Response, next: NextFuncti
 
     const hashedPassword = await hashPassword(password);
 
-    const user = UserInstance.create(
+    const user = await UserInstance.create(
         {
             id: v4(),
             userName,
@@ -51,10 +55,14 @@ export const registerUser = async (req: Request, res: Response, next: NextFuncti
         })
     }
 
-    const token = generateSignature(user.id)
+    const token = generateSignature(user)
 
-    const keysToExclude = [password, user.id];
+    console.log('user   ', user)
+
+    const keysToExclude = ['password', 'id'];
     const updatedUser = excludeProperty(user, keysToExclude);
+
+    console.log('updatedUser   ', updatedUser)
 
     res.cookie('token', token, {
         expires: cookieTimeout()

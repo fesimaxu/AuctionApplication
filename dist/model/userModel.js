@@ -42,7 +42,7 @@ UserInstance.init({
         }
     },
     phoneNumber: {
-        type: sequelize_1.DataTypes.NUMBER,
+        type: sequelize_1.DataTypes.STRING,
         allowNull: true
     }
 }, {

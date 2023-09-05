@@ -26,8 +26,8 @@ const hashPassword = (plainPassword) => __awaiter(void 0, void 0, void 0, functi
     return bcrypt_1.default.hash(plainPassword, salt);
 });
 exports.hashPassword = hashPassword;
-const generateSignature = (payload) => __awaiter(void 0, void 0, void 0, function* () {
-    const value = jsonwebtoken_1.default.sign(payload, `${process.env.TOKEN_SECRET}`, {
+const generateSignature = (data) => __awaiter(void 0, void 0, void 0, function* () {
+    const value = jsonwebtoken_1.default.sign(data, `${process.env.TOKEN_SECRET}`, {
         expiresIn: `${process.env.TOKEN_EXPIRES_IN}m`,
     });
     return value;

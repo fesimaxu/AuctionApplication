@@ -6,6 +6,6 @@ export interface UserAttributes {
     dateOfBirth?: string;
     email?: string;
     password?: string;
-    phoneNumber: number;
+    phoneNumber?: string;
 
 }

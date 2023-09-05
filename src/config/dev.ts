@@ -2,7 +2,7 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
-const {DEV_PORT, DEV_DB_NAME, DEV_DB_HOST, DEV_DB_USERNAME, DEV_DB_PASSWORD }   = process.env;
+const { DEV_PORT, DEV_DB_NAME, DEV_DB_HOST, DEV_DB_USERNAME, DEV_DB_PASSWORD }   = process.env;
 
 
 export default {

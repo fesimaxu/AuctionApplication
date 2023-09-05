@@ -17,4 +17,6 @@ if(stage === "production"){
 
 export default merge({
    stage
-}, config)
+}, 
+config
+)

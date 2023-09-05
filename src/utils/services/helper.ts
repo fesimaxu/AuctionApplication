@@ -20,8 +20,8 @@ export const hashPassword = async (plainPassword: string) => {
 }
 
 
-export const generateSignature = async (payload: any) => {
-    const value = jwt.sign( payload , `${process.env.TOKEN_SECRET}`, {
+export const generateSignature = async (data: any) => {
+    const value = jwt.sign( data , `${process.env.TOKEN_SECRET}`, {
         expiresIn: `${process.env.TOKEN_EXPIRES_IN}m`,
       });
 

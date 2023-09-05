@@ -43,7 +43,7 @@ UserInstance.init({
     }
   },
   phoneNumber: {
-    type: DataTypes.NUMBER,
+    type: DataTypes.STRING,
     allowNull: true
   }
 },{

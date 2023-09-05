@@ -5,7 +5,8 @@ import dbConfig from "./index"
 dotenv.config;
 
 
-export const {PORT,
+export const {
+    PORT,
     DB_HOST,
     DB_NAME,
     DB_USERNAME,

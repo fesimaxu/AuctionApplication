@@ -17,9 +17,12 @@ const helper_1 = require("../utils/services/helper");
 const service_1 = require("../utils/services/service");
 const registerUser = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const { userName, firstName, lastName, dateOfBirth, email, password, phoneNumber } = req.body;
-        const birth_year = dateOfBirth.split(' ')[2];
-        const { error } = validation_1.registerSchema.validate({ userName, firstName, lastName, birth_year, email, password });
+        let { userName, firstName, lastName, dateOfBirth, email, password, repeat_password, phoneNumber } = req.body;
+        console.log("phone number ", phoneNumber);
+        console.log('dateOfBirth', dateOfBirth);
+        const birth_year = dateOfBirth.split('-')[2];
+        console.log("birth_year", birth_year);
+        const { error } = validation_1.registerSchema.validate({ userName, firstName, lastName, birth_year, email, password, repeat_password });
         if (error) {
             return res.status(400).json({
                 status: `error`,
@@ -28,7 +31,7 @@ const registerUser = (req, res, next) => __awaiter(void 0, void 0, void 0, funct
             });
         }
         const hashedPassword = yield (0, helper_1.hashPassword)(password);
-        const user = userModel_1.UserInstance.create({
+        const user = yield userModel_1.UserInstance.create({
             id: (0, uuid_1.v4)(),
             userName,
             firstName,
@@ -45,9 +48,11 @@ const registerUser = (req, res, next) => __awaiter(void 0, void 0, void 0, funct
                 message: `user not successfully created`
             });
         }
-        const token = (0, helper_1.generateSignature)(user.id);
-        const keysToExclude = [password, user.id];
+        const token = (0, helper_1.generateSignature)(user);
+        console.log('user   ', user);
+        const keysToExclude = ['password', 'id'];
         const updatedUser = (0, service_1.excludeProperty)(user, keysToExclude);
+        console.log('updatedUser   ', updatedUser);
         res.cookie('token', token, {
             expires: (0, helper_1.cookieTimeout)()
         });

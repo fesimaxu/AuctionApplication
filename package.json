@@ -33,6 +33,7 @@
     "lodash.merge": "^4.6.2",
     "morgan": "^1.10.0",
     "pg": "^8.11.3",
+    "postgres": "^3.3.5",
     "sequelize": "^6.32.1",
     "uuid": "^9.0.0"
   }
