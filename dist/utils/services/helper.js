@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.cookieTimeout = exports.verifySignature = exports.generateSignature = exports.hashPassword = void 0;
+exports.cookieTimeout = exports.verifySignature = exports.generateSignature = exports.verifyPassword = exports.hashPassword = void 0;
 const bcrypt_1 = __importDefault(require("bcrypt"));
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const dotenv_1 = __importDefault(require("dotenv"));
@@ -26,6 +26,10 @@ const hashPassword = (plainPassword) => __awaiter(void 0, void 0, void 0, functi
     return bcrypt_1.default.hash(plainPassword, salt);
 });
 exports.hashPassword = hashPassword;
+const verifyPassword = (plainPassword, hashPassword) => __awaiter(void 0, void 0, void 0, function* () {
+    return bcrypt_1.default.compare(plainPassword, hashPassword);
+});
+exports.verifyPassword = verifyPassword;
 const generateSignature = (data) => __awaiter(void 0, void 0, void 0, function* () {
     const value = jsonwebtoken_1.default.sign(data, `${process.env.TOKEN_SECRET}`, {
         expiresIn: `${process.env.TOKEN_EXPIRES_IN}m`,

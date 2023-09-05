@@ -11,6 +11,9 @@ export const registerSchema = Joi.object({
 
     lastName: Joi.string().required(),
 
+    email: Joi.string()
+    .email({ minDomainSegments: 2, tlds: { allow: ['com', 'net'] } }),
+
     password: Joi.string()
         .pattern(new RegExp('^[a-zA-Z0-9]{3,30}$')),
 
@@ -18,9 +21,18 @@ export const registerSchema = Joi.object({
 
     birth_year: Joi.number()
         .integer()
-        .max(2005),
+        .max(2005)
 
-    email: Joi.string()
-        .email({ minDomainSegments: 2, tlds: { allow: ['com', 'net'] } })
+  
 })
     .with('password', 'repeat_password');
+
+
+
+    export const loginSchema = Joi.object({
+        email: Joi.string()
+        .email({ minDomainSegments: 2, tlds: { allow: ['com', 'net'] } }),
+    
+        password: Joi.string()
+            .pattern(new RegExp('^[a-zA-Z0-9]{3,30}$'))
+    })

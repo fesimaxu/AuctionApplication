@@ -26,6 +26,10 @@ UserInstance.init({
     type: DataTypes.STRING,
     allowNull: false
   },
+  email: {
+    type: DataTypes.STRING,
+    allowNull: false
+  },
   dateOfBirth: {
     type: DataTypes.STRING,
     allowNull: false

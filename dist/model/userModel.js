@@ -25,6 +25,10 @@ UserInstance.init({
         type: sequelize_1.DataTypes.STRING,
         allowNull: false
     },
+    email: {
+        type: sequelize_1.DataTypes.STRING,
+        allowNull: false
+    },
     dateOfBirth: {
         type: sequelize_1.DataTypes.STRING,
         allowNull: false

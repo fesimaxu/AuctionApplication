@@ -19,6 +19,10 @@ export const hashPassword = async (plainPassword: string) => {
     return bcrypt.hash(plainPassword,  salt)
 }
 
+export const verifyPassword =async (plainPassword:string, hashPassword: any) => {
+    return bcrypt.compare(plainPassword, hashPassword);
+}
+
 
 export const generateSignature = async (data: any) => {
     const value = jwt.sign( data , `${process.env.TOKEN_SECRET}`, {

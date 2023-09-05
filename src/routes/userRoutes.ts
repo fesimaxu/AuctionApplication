@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { registerUser } from "../controller/userController";
+import { registerUser , loginUser} from "../controller/userController";
 
 
 const router = Router();
@@ -7,6 +7,7 @@ const router = Router();
 
 
 router.post('/signup', registerUser);
+router.post('/signin', loginUser);
 
 
 
