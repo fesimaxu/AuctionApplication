@@ -52,5 +52,5 @@ UserInstance.init({
   }
 },{
     sequelize: db,
-    tableName: 'User'
+    tableName: `User`
 })

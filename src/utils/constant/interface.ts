@@ -9,3 +9,17 @@ export interface UserAttributes {
     phoneNumber?: string;
 
 }
+
+
+
+export interface ItemAttributes {
+    id?: string;
+    userId: string;
+    title?: string;
+    description?: string;
+    image?: string;
+    startingBid: number;
+    reservePrice: number;
+    auctionEndTime: Date;
+
+}

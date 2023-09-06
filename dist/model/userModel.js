@@ -51,5 +51,5 @@ UserInstance.init({
     }
 }, {
     sequelize: dbConfig_1.db,
-    tableName: 'User'
+    tableName: `User`
 });
