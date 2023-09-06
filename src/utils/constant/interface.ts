@@ -14,12 +14,29 @@ export interface UserAttributes {
 
 export interface ItemAttributes {
     id?: string;
-    userId: string;
+    userId?: string;
     title?: string;
     description?: string;
     image?: string;
-    startingBid: number;
-    reservePrice: number;
-    auctionEndTime: Date;
+    startingBid?: number;
+    reservePrice?: number;
+    auctionEndTime?: Date;
 
+}
+
+
+export interface BidderAttributes {
+    id?: string;
+    bidAmount?: number;
+    timeStamp?: Date;
+    itemId?: string;
+
+}
+
+export interface AuctionAttributes {
+    id?: string;
+    itemId?: string;
+    highestBidder?: string;
+    auctionStartTime?: Date;
+    auctionEndTime?: Date;
 }

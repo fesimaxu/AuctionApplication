@@ -16,10 +16,10 @@ ItemInstance.init(
       allowNull: false,
     },
     userId:{
-        type: DataTypes.UUID,
+        type: DataTypes.STRING,
         references:{
             model: UserInstance,
-            key:'id'
+            key: `id`
     
           }
     },

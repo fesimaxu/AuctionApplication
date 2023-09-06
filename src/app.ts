@@ -7,6 +7,7 @@ import cors from "cors";
 import { HttpError } from 'http-errors';
 import { errorMessages, notFoundError } from "./middleware/errorMessage";
 import userRoutes from "./routes/userRoutes";
+import itemRoutes from "./routes/itemRoutes";
 
 
 const app = express();
@@ -21,7 +22,8 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cors());
 
 
-app.use('/users', userRoutes)
+app.use('/users', userRoutes);
+app.use('/item', itemRoutes);
 
 app.all('*', notFoundError);
 app.use(errorMessages);

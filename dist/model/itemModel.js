@@ -7,7 +7,7 @@ const userModel_1 = require("./userModel");
 class ItemInstance extends sequelize_1.Model {
 }
 exports.ItemInstance = ItemInstance;
-userModel_1.UserInstance.hasMany(ItemInstance, { foreignKey: 'userId', as: 'items' });
+//UserInstance.hasMany(ItemInstance, { foreignKey: 'userId', as: 'items' });
 ItemInstance.init({
     id: {
         type: sequelize_1.DataTypes.UUID,
@@ -15,7 +15,7 @@ ItemInstance.init({
         allowNull: false,
     },
     userId: {
-        type: sequelize_1.DataTypes.UUID,
+        type: sequelize_1.DataTypes.STRING,
         references: {
             model: userModel_1.UserInstance,
             key: 'id'

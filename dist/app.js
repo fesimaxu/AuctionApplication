@@ -11,6 +11,7 @@ const cookie_parser_1 = __importDefault(require("cookie-parser"));
 const cors_1 = __importDefault(require("cors"));
 const errorMessage_1 = require("./middleware/errorMessage");
 const userRoutes_1 = __importDefault(require("./routes/userRoutes"));
+const itemRoutes_1 = __importDefault(require("./routes/itemRoutes"));
 const app = (0, express_1.default)();
 const { PORT } = config_1.default;
 // middlewares
@@ -20,6 +21,7 @@ app.use((0, cookie_parser_1.default)());
 app.use(express_1.default.urlencoded({ extended: false }));
 app.use((0, cors_1.default)());
 app.use('/users', userRoutes_1.default);
+app.use('/item', itemRoutes_1.default);
 app.all('*', errorMessage_1.notFoundError);
 app.use(errorMessage_1.errorMessages);
 dbConfig_1.db.sync({}).then(() => {

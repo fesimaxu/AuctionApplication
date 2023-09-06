@@ -42,7 +42,7 @@ const registerUser = (req, res, next) => __awaiter(void 0, void 0, void 0, funct
             return res.status(400).json({
                 status: "error",
                 method: req.method,
-                message: "user already exists",
+                message: `user already exists`
             });
         }
         const hashedPassword = yield (0, helper_1.hashPassword)(password);
@@ -100,28 +100,28 @@ const loginUser = (req, res, next) => __awaiter(void 0, void 0, void 0, function
     }));
     if (!user) {
         return res.status(400).json({
-            status: "error",
+            status: `error`,
             method: req.method,
-            message: "you are not a registered user",
+            message: `you are not a registered user`
         });
     }
     const validatePassword = yield (0, helper_1.verifyPassword)(password, user.password);
     if (!validatePassword) {
         return res.status(404).json({
-            status: "fail",
-            message: "Invalid email or password",
+            status: `error`,
+            message: `Invalid email or password`
         });
     }
     const token = yield (0, helper_1.generateSignature)({
         id: user.id,
         email: user.email,
     });
-    res.cookie("token", token, {
+    res.cookie(`token`, token, {
         expires: (0, helper_1.cookieTimeout)(),
     });
     return res.status(200).json({
-        status: "success",
-        message: "User logged in successfully",
+        status: `success`,
+        message: `User logged in successfully`
     });
 });
 exports.loginUser = loginUser;

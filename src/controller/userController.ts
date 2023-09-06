@@ -56,7 +56,7 @@ export const registerUser = async (
       return res.status(400).json({
         status: "error",
         method: req.method,
-        message: "user already exists",
+        message: `user already exists`
       });
     }
 
@@ -131,9 +131,9 @@ export const loginUser = async (
 
   if (!user) {
     return res.status(400).json({
-      status: "error",
+      status: `error`,
       method: req.method,
-      message: "you are not a registered user",
+      message: `you are not a registered user`
     });
   }
 
@@ -141,8 +141,8 @@ export const loginUser = async (
 
   if (!validatePassword) {
     return res.status(404).json({
-      status: "fail",
-      message: "Invalid email or password",
+      status: `error`,
+      message:`Invalid email or password`
     });
   }
 
@@ -151,12 +151,12 @@ export const loginUser = async (
     email: user.email,
   });
 
-  res.cookie("token", token, {
+  res.cookie(`token`, token, {
     expires: cookieTimeout(),
   });
 
   return res.status(200).json({
-    status: "success",
-    message: "User logged in successfully",
+    status: `success`,
+    message: `User logged in successfully`
   });
 };

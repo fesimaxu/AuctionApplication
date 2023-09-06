@@ -16,7 +16,7 @@ const service_1 = require("../utils/services/service");
 const auth = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         let token;
-        if (req.headers.authorization && req.headers.authorization.startsWith("Bearer")) {
+        if (req.headers.authorization && req.headers.authorization.startsWith(`Bearer`)) {
             token = req.headers.authorization.split(" ")[1];
         }
         else if (req.cookies.token) {
@@ -24,25 +24,25 @@ const auth = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () 
         }
         if (!token) {
             return res.status(401).json({
-                status: "fail",
-                message: "You are not logged in",
+                status: `error`,
+                message: `You are not logged in`
             });
         }
         const decoded = yield (0, helper_1.verifySignature)(token);
         if (!decoded) {
             return res.status(401).json({
-                status: "fail",
-                message: "Invalid token or user doesn't exist",
+                status: `error`,
+                message: `Invalid token or user doesn't exist`
             });
         }
         const user = yield userModel_1.UserInstance.findOne({ where: { email: decoded.email } });
         if (!user) {
             return res.status(401).json({
-                status: "failed",
-                message: "User with that token no longer exist",
+                status: `error`,
+                message: `User with that token no longer exist`
             });
         }
-        res.locals.user = (0, service_1.excludeProperty)(user, ["password"]);
+        res.locals.user = (0, service_1.excludeProperty)(user, [`password`]);
         next();
     }
     catch (err) {
