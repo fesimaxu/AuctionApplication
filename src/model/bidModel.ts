@@ -1,11 +1,10 @@
 import { DataTypes, Model } from "sequelize";
 import { db } from "../config/dbConfig";
 import { BidderAttributes } from "../utils/constant/interface";
-import { ItemInstance } from "./itemModel";
+import { UserInstance } from "./userModel";
 
 
 export class BidderInstance extends Model<BidderAttributes> {};
-
 
 
 BidderInstance.init({
@@ -16,21 +15,31 @@ BidderInstance.init({
     },
     bidAmount: {
         type: DataTypes.INTEGER,
-        allowNull: false
+        allowNull: false,
+        defaultValue: 0
+    },
+    isPaid:{
+        type: DataTypes.BOOLEAN,
+        allowNull: false,
+        defaultValue: false
     },
     timeStamp: {
         type: DataTypes.TIME,
         allowNull: false
-    },
-    itemId: {
-        type: DataTypes.STRING,
-        references: {
-            model: ItemInstance,
-            key: `id`
-        }
     }
 },{
     sequelize: db,
-    tableName: `Bid`
+    tableName: `Bidder`
 }
 )
+
+
+// User and Bid association - a user can make many bid and a bid belongs to a user
+
+UserInstance.hasMany(BidderInstance, {
+    sourceKey: `id`,
+    foreignKey: `userId`, // this determines the name in `associations`!
+    as: `bid`
+  });
+  
+  BidderInstance.belongsTo(UserInstance, { targetKey: `id` });

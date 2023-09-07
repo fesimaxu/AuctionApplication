@@ -30,8 +30,8 @@ app.use(errorMessages);
 
 
 
-db.sync({}).then(()=>{
-    console.log(`Database is succeffully connected`);
+db.sync({alter: true}).then(()=>{
+    console.log(`Database is successfully connected`);
 }).catch((error: HttpError)=>{
     console.log(`Database error at ${error}`)
 })

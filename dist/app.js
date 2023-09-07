@@ -24,8 +24,8 @@ app.use('/users', userRoutes_1.default);
 app.use('/item', itemRoutes_1.default);
 app.all('*', errorMessage_1.notFoundError);
 app.use(errorMessage_1.errorMessages);
-dbConfig_1.db.sync({}).then(() => {
-    console.log(`Database is succeffully connected`);
+dbConfig_1.db.sync({ alter: true }).then(() => {
+    console.log(`Database is successfully connected`);
 }).catch((error) => {
     console.log(`Database error at ${error}`);
 });

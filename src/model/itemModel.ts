@@ -5,7 +5,7 @@ import { UserInstance } from "./userModel";
 
 export class ItemInstance extends Model<ItemAttributes> {}
 
-UserInstance.hasMany(ItemInstance, { foreignKey: 'userId', as: 'items' });
+
 
 
 ItemInstance.init(
@@ -14,14 +14,6 @@ ItemInstance.init(
       type: DataTypes.UUID,
       primaryKey: true,
       allowNull: false,
-    },
-    userId:{
-        type: DataTypes.STRING,
-        references:{
-            model: UserInstance,
-            key: `id`
-    
-          }
     },
     title: {
       type: DataTypes.STRING,
@@ -55,3 +47,14 @@ ItemInstance.init(
 );
 
 
+
+
+
+// a user can have many items for auction and an item belongs to a user
+
+UserInstance.hasMany(ItemInstance, {
+    sourceKey: 'id',
+    foreignKey: 'userId' // this determines the name in `associations`!
+  });
+  
+  ItemInstance.belongsTo(UserInstance, { targetKey: 'id' });

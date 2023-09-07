@@ -50,7 +50,8 @@ UserInstance.init({
     type: DataTypes.STRING,
     allowNull: true
   }
-},{
+},
+{
     sequelize: db,
     tableName: `User`
 })
